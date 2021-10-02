@@ -1,0 +1,90 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100%;
+  background-color: bisque;
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+img {
+  display: block;
+}
+
+.scoreboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.score-text {
+  font-size: 1.5rem;
+  max-width: 60ch;
+}
+
+.gameboard {
+  display: grid;
+  gap: 2rem;
+  padding: 2rem;
+  grid-template-columns: repeat(5, minmax(8rem, 1fr));
+  grid-template-rows: repeat(4, minmax(8rem, 1fr));
+  perspective: 1000px;
+}
+
+.card {
+  --rotation: 0;
+  border-radius: 1.5rem 30%;
+  transform-style: preserve-3d;
+  transform: rotateY(var(--rotation));
+  transition: all 0.5s ease-out, border-radius 1ms;
+  position: relative;
+  box-shadow: 0 5px 20px -2px rgba(0, 0, 0, 0.2);
+}
+
+.card.selected {
+  --rotation: 180deg;
+}
+
+.front {
+  transform: rotateY(180deg);
+  object-fit: cover;
+}
+
+.front,
+.back {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.back {
+  border-radius: 1.5rem 30%;
+  backface-visibility: hidden;
+  background-color: white;
+}
+
+.matched {
+  --rotation: 180deg;
+  pointer-events: none;
+  box-shadow:
+    0 5px 20px -2px rgba(0, 0, 0, 0.2), 0 0 0 6px rgba(123, 255, 0, 0.829);
+}
